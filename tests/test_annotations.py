@@ -31,3 +31,12 @@ def test_read_spans() -> None:
     )
 
     assert len(list(token.read_spans())) == 1
+
+
+def test_get_children() -> None:
+    word = MockAnnotation(
+        name="<token:word>", values=["Han", "åt", "glassen", "utanför", "kiosken", "."]
+    )
+    sentence = MockAnnotation(name="<sentence>", children={"<token:word>": [[0, 1, 2, 3, 4, 5]]})
+
+    _sentences, _orphans = sentence.get_children(word)
