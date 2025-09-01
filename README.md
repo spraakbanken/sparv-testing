@@ -1,2 +1,3 @@
-# sparv-pipeline-testing
-Testing utilities for sparv-pipeline
+# sparv-testing
+
+Testing utilities for sparv
