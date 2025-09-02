@@ -57,8 +57,8 @@ help:
 	@echo ""
 
 PLATFORM := `uname -o`
-REPO := sparv-pipeline-testing
-PROJECT_SRC := src/sparv_pipeline_testing
+REPO := sparv-testing
+PROJECT_SRC := src/sparv_testing
 
 ifeq (${VIRTUAL_ENV},)
   VENV_NAME = .venv
@@ -83,11 +83,11 @@ dev: install-dev
 
 # setup development environment
 install-dev:
-	uv sync --dev
+	uv sync --all-packages --dev
 
 # setup production environment
 install:
-	uv sync --no-dev
+	uv sync --all-packages --no-dev
 
 lock: uv.lock
 
@@ -101,11 +101,11 @@ test:
 .PHONY: test-w-coverage
 # run all tests with coverage collection
 test-w-coverage:
-	${INVENV} pytest -vv ${cov}  --cov-report=${cov_report} ${all_tests}
+	${INVENV} pytest -vv ${cov} --cov-report=term-missing --cov-report=xml:coverage.xml --cov-report=lcov:coverage.lcov ${all_tests}
 
 .PHONY: doc-tests
 doc-tests:
-	${INVENV} pytest ${cov} --cov-report=${cov_report} --doctest-modules ${PROJECT_SRC}
+	${INVENV} pytest ${cov} --cov-report=term-missing --cov-report=xml:coverage.xml --cov-report=lcov:coverage.lcov --doctest-modules ${PROJECT_SRC}
 
 .PHONY: type-check
 # check types
@@ -150,8 +150,8 @@ publish:
 prepare-release: update-changelog tests/requirements-testing.lock
 
 # we use lock extension so that dependabot doesn't pick up changes in this file
-tests/requirements-testing.lock: pyproject.toml tests/requirements-testing.in
-	uv pip compile $^ --output-file $@
+tests/requirements-testing.lock: pyproject.toml
+	uv export --dev --format requirements-txt --no-hashes --no-emit-project --output-file $@
 
 .PHONY: update-changelog
 update-changelog: CHANGELOG.md

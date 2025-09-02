@@ -42,9 +42,7 @@ class MockAnnotation(Annotation):
     def get_children(
         self,
         child: BaseAnnotation,
-        *,
         orphan_alert: bool = False,  # noqa: ARG002
-        preserve_parent_annotation_order: bool = False,  # noqa: ARG002
     ) -> tuple[list, list]:
         """Return two lists.
 

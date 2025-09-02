@@ -1,4 +1,4 @@
-from sparv_pipeline_testing.annotations import MockAnnotation
+from sparv_testing.annotations import MockAnnotation
 
 
 def test_create_empty_attributes() -> None:
