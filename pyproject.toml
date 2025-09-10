@@ -1,6 +1,6 @@
 [project]
 name = "sparv-testing"
-version = "0.1.7"
+version = "0.2.0"
 description = "Testing utilities for sparv-pipeline."
 readme = "README.md"
 authors = [
