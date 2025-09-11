@@ -1600,7 +1600,7 @@ wheels = [
 
 [[package]]
 name = "sparv-testing"
-version = "0.1.7"
+version = "0.2.0"
 source = { editable = "." }
 dependencies = [
     { name = "sparv" },
